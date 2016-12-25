@@ -28,6 +28,7 @@ if test x"${SYSTEM_GEOS}" = x""; then
   fi
 
   R_CFLAGS="`${R_HOME}/bin/R CMD config CFLAGS` `${R_HOME}/bin/R CMD config CPICFLAGS`"
+  R_CXXFLAGS="`${R_HOME}/bin/R CMD config CXXFLAGS` `${R_HOME}/bin/R CMD config CXXPICFLAGS`"
 
   GEOS_VERSION="3.6.1"
 
@@ -53,7 +54,7 @@ if test x"${SYSTEM_GEOS}" = x""; then
   
 
   AC_MSG_NOTICE([Configuring GEOS])
-  sh ./configure --prefix="${INST_DIR}" --enable-static --disable-shared CFLAGS="${R_CFLAGS}" #> /dev/null 2>&1
+  sh ./configure --prefix="${INST_DIR}" --enable-static --disable-shared CFLAGS="${R_CFLAGS}" CXXFLAGS="${R_CXXFLAGS}" #> /dev/null 2>&1
   
   AC_MSG_NOTICE([Compiling GEOS])
   make
