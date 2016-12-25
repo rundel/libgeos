@@ -77,7 +77,7 @@ else # User provided prefix for GEOS
   GEOS_CPPFLAGS="-I${SYSTEM_GEOS}/include"
   CPPFLAGS="${CPPFLAGS} ${GEOS_CPPFLAGS}"
   AC_CHECK_HEADER(
-    [GEOS_api.h],
+    [geos.h geos_c.h],
     [],
     [AC_MSG_ERROR([Unable to locate GEOS_api.h])]
   ) 
@@ -96,6 +96,13 @@ else # User provided prefix for GEOS
     [GEOS_init_r], 
     [GEOS_LIBS="${GEOS_LIBS} -lgeos_c"], 
     [AC_MSG_ERROR([Unable to locate libgeos_c])]
+  )
+
+  AC_CHECK_LIB(
+    [geos], 
+    [geosversion], 
+    [GEOS_LIBS="${GEOS_LIBS} -lgeos"], 
+    [AC_MSG_ERROR([Unable to locate libgeos])]
   )
 
 fi
