@@ -1,6 +1,6 @@
 AC_PREREQ(2.61)
 
-AC_INIT([libGEOS], [4.9.3])
+AC_INIT([libgeos], [3.6.1])
 
 AC_LANG(C++)
 AC_REQUIRE_CPP
@@ -9,8 +9,8 @@ AC_PROG_CXX
 AC_ARG_WITH(
   [system-geos],
   AC_HELP_STRING(
-    [--with-system-geos=<GEOS prefix>],
-    [Supply location (prefix) of GEOS]
+    [--with-system-geos=<geos prefix>],
+    [Supply location (prefix) of geos]
   ),
   [SYSTEM_GEOS=$withval],
   [SYSTEM_GEOS=""]
@@ -27,7 +27,7 @@ if test x"${SYSTEM_GEOS}" = x""; then
       AC_MSG_ERROR([Could not determine R_HOME.])   
   fi
 
-  R_CPICFLAGS=`${R_HOME}/bin/R CMD config CPICFLAGS`
+  R_CFLAGS="`${R_HOME}/bin/R CMD config CFLAGS` `${R_HOME}/bin/R CMD config CPICFLAGS`"
 
   GEOS_VERSION="3.6.1"
 
@@ -46,28 +46,30 @@ if test x"${SYSTEM_GEOS}" = x""; then
     AC_MSG_ERROR([GEOS download failed.])   
   fi
 
-
+  INST_DIR=`cd inst;pwd`
+  
+  AC_MSG_NOTICE([Changing to `pwd`])
   cd ${GEOS_DIR}
-  echo "Changing to `pwd`"
-
-  INST_DIR=`cd ../inst;pwd`
+  
 
   AC_MSG_NOTICE([Configuring GEOS])
-  sh ./configure --prefix="${INST_DIR}" --enable-static --disable-shared CFLAGS=${R_CPICFLAGS} #> /dev/null 2>&1
+  sh ./configure --prefix="${INST_DIR}" --enable-static --disable-shared CFLAGS="${R_CFLAGS}" #> /dev/null 2>&1
   
   AC_MSG_NOTICE([Compiling GEOS])
-  make install #> /dev/null 2>&1
+  make
+  make install #prefix=${INST_DIR}/inst exec_prefix=${INST_DIR}/inst install  #> /dev/null 2>&1
 
   cd ..
 
+
+  AC_MSG_NOTICE([Cleaning up GEOS (${GEOS_VERSION})])
   strip -x -S inst/lib/libgeos.a
   strip -x -S inst/lib/libgeos_c.a
+  rm -rf inst/bin # delete gdal-config 
 
   if ! test -e "inst/lib/libgeos_c.a" -a -e "inst/lib/libgeos.a"; then
     AC_MSG_ERROR([Building GEOS failed.])   
   fi
-
-  #rm -rf "${GEOS_DIR}"
 
   GEOS_LIBS="${INST_DIR}/lib/libgeos_c.a ${INST_DIR}/lib/libgeos.a"
   GEOS_CPPFLAGS="-I${INST_DIR}/include"
