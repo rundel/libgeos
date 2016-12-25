@@ -1,0 +1,17 @@
+autom4te.cache/
+libgeos.Rcheck/
+libgeos_*.tar.gz
+.Rproj.user
+.Rprofile
+.Rhistory
+.RData
+src/*.o
+src/*.so
+src/*.dll
+configure
+src/symbols.rds
+config.log
+geos-*/
+inst/
+config.status
+src/Makevars

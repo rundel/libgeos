@@ -1,0 +1,14 @@
+Package: libgeos
+Type: Package
+Title: R package providing the GEOS library
+Version: 3.6.1
+Date: 2016-12-12
+Author: Colin Rundel
+Maintainer: Colin Rundel <rundel@gmail.com>
+Description: Blah blah blah
+License: GPL (>= 2)
+LazyLoad: yes
+LinkingTo: Rcpp
+Imports: Rcpp (>= 0.11.0)
+URL: http://www.github.com/rundel/libgeos
+BugReports: http://www.github.com/rundel/libgeos/issues

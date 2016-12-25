@@ -1,0 +1,17 @@
+PKG_CPPFLAGS = -I../inst/include 
+PKG_LIBS = -L../windows/proj-4.9.3/lib-4.9.3/${R_ARCH}/ -lgeos -lgeos_c
+
+all: clean winlibs
+
+winlibs:
+	mkdir -p ../windows
+	${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "download.file('https://github.com/rwinlib/geos/archive/v3.5.0.zip','../windows/lib.zip')"
+	${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "unzip('../windows/lib.zip', exdir = '../windows')"
+	cp -r ../windows/geos-3.5.0 ../inst/
+  rm v3.5.0.zip
+
+clean:
+	rm -f $(OBJECTS) $(SHLIB)
+
+.PHONY: all winlibs clean
+
