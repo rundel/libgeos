@@ -63,11 +63,7 @@ if test x"${SYSTEM_GEOS}" = x""; then
   strip -x -S inst/lib/libgeos.a
   strip -x -S inst/lib/libgeos_c.a
 
-  if ! test -e "inst/lib/libgeos_c.a"; then
-    AC_MSG_ERROR([Building GEOS failed.])   
-  fi
-
-    if ! test -e "inst/lib/libgeos.a"; then
+  if ! test -e "inst/lib/libgeos_c.a" -a -e "inst/lib/libgeos.a"; then
     AC_MSG_ERROR([Building GEOS failed.])   
   fi
 
