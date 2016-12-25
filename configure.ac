@@ -27,11 +27,12 @@ if test x"${SYSTEM_GEOS}" = x""; then
       AC_MSG_ERROR([Could not determine R_HOME.])   
   fi
 
-  R_CFLAGS="`${R_HOME}/bin/R CMD config CFLAGS` `${R_HOME}/bin/R CMD config CPICFLAGS`"
-  R_CXXFLAGS="`${R_HOME}/bin/R CMD config CXXFLAGS` `${R_HOME}/bin/R CMD config CXXPICFLAGS`"
+  R_CONFIG=${R_HOME}/bin/R CMD config
+  R_CFLAGS="`${R_CONFIG} CFLAGS` `${R_CONFIG} CPICFLAGS`"
+  R_CXXFLAGS="`${R_CONFIG} CXXFLAGS` `${R_CONFIG} CXXPICFLAGS`"
 
+  
   GEOS_VERSION="3.6.1"
-
   
   GEOS_ZIP="geos-${GEOS_VERSION}.tar.bz2"
   GEOS_DIR="geos-${GEOS_VERSION}"
