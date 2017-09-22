@@ -1,9 +1,9 @@
 args = commandArgs(trailingOnly=TRUE)
 
 url  = args[1]
-file = args[2]
-dir  = args[3]
+dir  = args[2]
 
+file = basename(url)
 download.file(url, file, quiet = TRUE)
 
 ext = tolower(tools::file_ext(file))
