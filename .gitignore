@@ -15,3 +15,4 @@ geos-*/
 inst/
 config.status
 src/Makevars
+geos_version
