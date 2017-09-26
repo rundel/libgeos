@@ -11,7 +11,7 @@ GEOS_DIR="geos-${GEOS_VERSION}"
 R_HOME=`R RHOME`
 if test -z "${R_HOME}"; then
   echo "Could not determine R_HOME."
-  exit1
+  exit 1
 fi
 
 

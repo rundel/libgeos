@@ -13,6 +13,6 @@ rm -rf inst/include
 rm -rf inst/share
 rm -rf inst/lib
 rm -rf inst/bin
-rm -rf geos-*/
+rm -rf inst/geos_config_path
 
 rm -rf windows/
