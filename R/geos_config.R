@@ -22,7 +22,7 @@ geos_prefix = function()
   if (check_geos_config_path())
     system2(get_geos_config_path(), "--prefix", stdout = TRUE)
   else
-    system.file("", package = "libgeos")
+    dirname(system.file(".", package = "libgeos"))
 }
 
 geos_cflags = function()
@@ -39,7 +39,7 @@ geos_includes = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--includes", stdout = TRUE)
   } else {
-    paste0(geos_prefix(),"include")
+    paste0(geos_prefix(),"/include")
   }
 }
 
