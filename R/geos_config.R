@@ -50,10 +50,7 @@ geos_libs = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--libs", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0(geos_ldflags(), " -lgeos")
-    else
-      system.file("lib/libgeos.a", package = "libgeos") 
+    paste0(geos_ldflags(), " -lgeos")
   }
 }
 
@@ -62,10 +59,7 @@ geos_clibs = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--clibs", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0(geos_ldflags(), " -lgeos_c")
-    else
-      system.file("lib/libgeos_c.a", package = "libgeos") 
+    paste0(geos_ldflags(), " -lgeos_c")
   }
 }
 
@@ -74,10 +68,7 @@ geos_cclibs = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--cclibs", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0(geos_ldflags(), " -lgeos")
-    else
-      system.file("lib/libgeos.a", package = "libgeos") 
+    paste0(geos_ldflags(), " -lgeos")
   } 
 }
 
@@ -86,11 +77,7 @@ geos_static_clibs = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--static-clibs", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0(geos_ldflags(), " -lgeos_c -lgeos")
-    else
-      paste(system.file("lib/libgeos_c.a", package = "libgeos"),
-            system.file("lib/libgeos.a", package = "libgeos"))
+    paste0(geos_ldflags(), " -lgeos_c -lgeos")
   }
 }
 
@@ -99,10 +86,7 @@ geos_static_cclibs = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--static-cclibs", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0(geos_ldflags(), " -lgeos")
-    else
-      system.file("lib/libgeos.a", package = "libgeos") 
+    paste0(geos_ldflags(), " -lgeos")
   }  
 }
 
@@ -111,10 +95,7 @@ geos_ldflags = function()
   if (check_geos_config_path()) {
     system2(get_geos_config_path(), "--ldflags", stdout = TRUE)
   } else {
-    if (.Platform$OS.type == "windows")
-      paste0("-L", geos_prefix(), "/lib")
-    else
-      system.file("lib", package = "libgeos") 
+    paste0("-L", geos_prefix(), "/lib")
   }
 }
 
