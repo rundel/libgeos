@@ -1,4 +1,4 @@
 useDynLib(libgeos)
 import(Rcpp)
 
-#exportPattern("^[[:alpha:]]+")
+exportPattern("^[[:alpha:]]+")
