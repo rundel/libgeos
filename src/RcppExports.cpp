@@ -5,25 +5,45 @@
 
 using namespace Rcpp;
 
-// geos_version
-Rcpp::IntegerVector geos_version(bool c_api);
-RcppExport SEXP libgeos_geos_version(SEXP c_apiSEXP) {
+// geos_c_api_version
+std::string geos_c_api_version();
+RcppExport SEXP _libgeos_geos_c_api_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< bool >::type c_api(c_apiSEXP);
-    rcpp_result_gen = Rcpp::wrap(geos_version(c_api));
+    rcpp_result_gen = Rcpp::wrap(geos_c_api_version());
     return rcpp_result_gen;
 END_RCPP
 }
-// test_api
-int test_api(std::string wkt);
-RcppExport SEXP libgeos_test_api(SEXP wktSEXP) {
+// geos_version
+std::string geos_version();
+RcppExport SEXP _libgeos_geos_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type wkt(wktSEXP);
-    rcpp_result_gen = Rcpp::wrap(test_api(wkt));
+    rcpp_result_gen = Rcpp::wrap(geos_version());
     return rcpp_result_gen;
 END_RCPP
+}
+// geos_jtsport
+std::string geos_jtsport();
+RcppExport SEXP _libgeos_geos_jtsport() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(geos_jtsport());
+    return rcpp_result_gen;
+END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_libgeos_geos_c_api_version", (DL_FUNC) &_libgeos_geos_c_api_version, 0},
+    {"_libgeos_geos_version", (DL_FUNC) &_libgeos_geos_version, 0},
+    {"_libgeos_geos_jtsport", (DL_FUNC) &_libgeos_geos_jtsport, 0},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_libgeos(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
