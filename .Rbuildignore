@@ -3,6 +3,4 @@
 ^\.Rproj\.user$
 \.Rprofile
 \.gitignore
-^windows
-^geos-
-cleanup
+autom4te\.cache
