@@ -7,6 +7,6 @@ GEOS_CONFIG=@GEOS_CONFIG@
 all: $(SHLIB) flags
 
 flags:
-	if test "${GEOS_CONFIG}" != "no"; then									\
+	@ if test "${GEOS_CONFIG}" != "no"; then								\
 		printf "${GEOS_CONFIG}\n" > ../inst/geos_config_path;	\
 	fi
