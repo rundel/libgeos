@@ -1,11 +1,12 @@
 #!/bin/sh
 
-GEOS_VERSION="3.6.2"
+rm -rf src/geos-*.*.*
+rm -rf src/geos
 
-printf ${GEOS_VERSION} > geos_version
+GEOS_VERSION=`grep "Version:" DESCRIPTION | cut -d" " -f2 | cut -d"-" -f1`
 
 GEOS_URL="http://download.osgeo.org/geos/geos-${GEOS_VERSION}.tar.bz2"
-GEOS_DIR="geos-${GEOS_VERSION}"
+GEOS_DIR="src/geos"
 
 
 R_HOME=`R RHOME`
@@ -15,22 +16,13 @@ if test -z "${R_HOME}"; then
 fi
 
 
-if ! test -d "${GEOS_DIR}"; then
-  echo "Downloading geos v${GEOS_VERSION} from ${GEOS_URL}."
-  ${R_HOME}/bin/Rscript tools/download_zip.R "${GEOS_URL}" "./"
-fi
+echo "Downloading geos v${GEOS_VERSION} from ${GEOS_URL}."
+${R_HOME}/bin/Rscript tools/download_zip.R "${GEOS_URL}" "src/"
 
+mv src/geos-*.*.* src/geos
 
-cd ${GEOS_DIR}
-
-if test -e "Makefile"; then
-  make clean
-fi
-
+cd src/geos
+ 
 aclocal
 automake
-autoconf
-
-cd ..
-
 autoconf

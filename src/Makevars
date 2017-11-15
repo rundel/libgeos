@@ -1,0 +1,23 @@
+WORK_DIR := $(shell pwd)
+INST_DIR := $(WORK_DIR)/../inst
+
+PKG_LIBS := $(INST_DIR)/lib/libgeos.a $(INST_DIR)/lib/libgeos_c.a
+PKG_CPPFLAGS := -I$(INST_DIR)/include
+
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Darwin)
+PKG_LIBS += -lc++
+endif
+
+all: $(SHLIB)
+
+$(SHLIB): $(INST_DIR)/lib/libgeos.a $(INST_DIR)/lib/libgeos_c.a
+
+geos/Makefile:
+	(cd geos && sh configure --enable-static --disable-shared --prefix=$(INST_DIR) && echo "BLAH $(INST_DIR)")
+
+$(INST_DIR)/lib/libgeos.a $(INST_DIR)/lib/libgeos_c.a: geos/Makefile
+	(cd geos && $(MAKE) install)
+	(rm -rf $(INST_DIR)/bin)
+	

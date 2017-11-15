@@ -12,7 +12,8 @@ configure
 src/symbols.rds
 config.log
 geos-*/
-inst/
+inst/include
+inst/lib
 config.status
-src/Makevars
+src/geos/
 geos_version

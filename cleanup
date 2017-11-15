@@ -4,7 +4,6 @@
 rm -rf autom4te.cache/ 
 rm -f config.log config.status 
 
-rm -f src/Makevars 
 rm -f src/*.o src/*.so src/*.dylib 
 
 rm -f *.zip
@@ -13,6 +12,12 @@ rm -rf inst/include
 rm -rf inst/share
 rm -rf inst/lib
 rm -rf inst/bin
-rm -rf inst/geos_config_path
 
 rm -rf windows/
+
+cd src/geos
+#if test -e "Makefile"; then
+#  make clean
+#fi
+
+rm -f Makefile
