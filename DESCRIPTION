@@ -12,3 +12,4 @@ LinkingTo: Rcpp
 Imports: Rcpp (>= 0.11.0)
 URL: http://www.github.com/rundel/libgeos
 BugReports: http://www.github.com/rundel/libgeos/issues
+RoxygenNote: 6.0.1
